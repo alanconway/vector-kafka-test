@@ -1,0 +1,13 @@
+apiVersion: logging.openshift.io/v1
+kind: ClusterLogForwarder
+metadata:
+  name: instance
+  namespace: openshift-logging
+spec:
+  outputs:
+  - name: kafka
+    type: kafka
+    url: https://my-cluster-kafka-bootstrap.kafka.svc.cluster.local:9093/my-topic
+  pipelines:
+  - inputRefs: [application]
+    outputRefs: [kafka]
